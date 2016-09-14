@@ -5,7 +5,7 @@ const React = require('react')
 const ReactDOMServer = require('react-dom/server')
 const ReactRouter = require('react-router')
 const match = ReactRouter.match
-const RouterContext = ReactRouter.context
+const RouterContext = ReactRouter.RouterContext
 const ReactRedux = require('react-redux')
 const Provider = ReactRedux.Provider
 const Store = require('./js/Store.jsx')
@@ -19,6 +19,7 @@ const ClientApp = require('./js/ClientApp.jsx')
 const Routes = ClientApp.Routes
 
 const app = express()
+
 app.use('/public', express.static('./public'))
 
 app.use((req, res) => {
@@ -33,7 +34,7 @@ app.use((req, res) => {
           React.createElement(RouterContext, renderProps)
         )
       )
-      res.status(200).send(template({body}))
+      res.status(200).send(template({ body }))
     } else {
       res.status(404).send('Not found')
     }
@@ -42,4 +43,3 @@ app.use((req, res) => {
 
 console.log('listening on port ' + port)
 app.listen(port)
-
